@@ -2,6 +2,7 @@ import  express from "express";
 import 'express-async-errors';
 import  mongoose from "mongoose"
 import { ConnectOptions } from "mongoose";
+import morgan from "morgan";
 import dotenv from "dotenv";
 
 
@@ -31,6 +32,7 @@ app.all('*', async () => {
 
 //Error Handler middleware
 app.use(errorHandler);
+app.use(morgan('tiny'));
 
 //Connect to enviroment variable
 dotenv.config();
