@@ -4,6 +4,7 @@ import  mongoose from "mongoose"
 import { ConnectOptions } from "mongoose";
 import morgan from "morgan";
 import dotenv from "dotenv";
+import cookieSession from "cookie-session";
 
 
 //Import Route Handlers
@@ -19,6 +20,12 @@ import { DatabaseConnectionError } from "./errors/database-connection-error";
 
 const app = express();
 app.use(express.json());
+app.use(cookieSession({
+    signed: false,
+    secure: true,
+    httpOnly: true,
+    maxAge: 1000 * 60 * 60 * 3,
+}))
 
 //Route Handlers
 app.use(currentUserRouter);
