@@ -1,10 +1,9 @@
 import  express from "express";
 import 'express-async-errors';
-import  mongoose from "mongoose"
-import { ConnectOptions } from "mongoose";
-import morgan from "morgan";
-import dotenv from "dotenv";
+import  mongoose from "mongoose";
 import cookieSession from "cookie-session";
+import morgan from "morgan";
+import dotenv from "dotenv"
 
 
 //Import Route Handlers
@@ -16,16 +15,16 @@ import { signupRouter } from "./routes/signup"
 //Import error handler
 import { errorHandler } from "./middlewares/error-handlers"
 import { NotFoundError } from "./errors/not-found-error"
-import { DatabaseConnectionError } from "./errors/database-connection-error";
 
 const app = express();
+app.set('trust proxy', true)
 app.use(express.json());
+
 app.use(cookieSession({
     signed: false,
-    secure: true,
-    httpOnly: true,
-    maxAge: 1000 * 60 * 60 * 3,
-}))
+    secure: true
+})
+);
 
 //Route Handlers
 app.use(currentUserRouter);
