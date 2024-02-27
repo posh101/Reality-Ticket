@@ -10,6 +10,6 @@ export class BadRequestError extends CustomError {
     }
 
         serializeErrors() {
-            return [{ message: "Email in use"}]
+            return [{ message: 'Invalid Credentials'}]
         }
     }

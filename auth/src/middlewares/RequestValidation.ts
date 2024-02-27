@@ -2,7 +2,12 @@ import { validationResult } from "express-validator";
 import { RequestValidationError } from "../errors/request-validation-error";
 import {Request, Response, NextFunction} from 'express'
 
-export const RequestValidation = (req: Request, res: Response, next: NextFunction) => {
+export const ValidateResult = 
+(
+    req: Request,
+     res: Response, 
+     next: NextFunction) => {
+        
     const errors = validationResult(req)
 
     if(!errors.isEmpty) {

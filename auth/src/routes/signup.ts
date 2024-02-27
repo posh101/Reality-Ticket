@@ -1,7 +1,7 @@
 import express, {Request, Response} from "express"
 import {body} from "express-validator"
 import {User} from "../models/user"
-import { RequestValidation } from "../middlewares/RequestValidation"
+import { ValidateResult } from "../middlewares/RequestValidation"
 import { BadRequestError } from "../errors/bad-request-error"
 import Jwt  from "jsonwebtoken"
 import "dotenv/config";
@@ -19,7 +19,7 @@ body('password')
   .withMessage('Password must be between 4 and 20 characters')
 ],
 
-RequestValidation,
+ValidateResult,
  async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
@@ -37,7 +37,9 @@ RequestValidation,
       email: user.email
     }, process.env.SIGN_IN_KEY)
      
-    req.session.jwt = userJwt;
+   req.session = {
+    jwt: userJwt
+   }
 
     res.status(201).json(user);
 

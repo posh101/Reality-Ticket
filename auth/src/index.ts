@@ -16,15 +16,15 @@ import { signupRouter } from "./routes/signup"
 import { errorHandler } from "./middlewares/error-handlers"
 import { NotFoundError } from "./errors/not-found-error"
 
-const app = express();
-app.set('trust proxy', true)
-app.use(express.json());
 
+const app = express();
+app.set('proxy', true)
+app.use(express.json());
 app.use(cookieSession({
     signed: false,
-    secure: true
-})
-);
+    secure: false,
+    domain: process.env.SESSION_DOMAIN
+}))
 
 //Route Handlers
 app.use(currentUserRouter);
