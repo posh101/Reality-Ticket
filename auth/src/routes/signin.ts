@@ -1,5 +1,5 @@
 import express, {Request, Response} from "express";
-import { body } from "express-validator";
+import { body, check } from "express-validator";
 import { ValidateResult } from "../middlewares/RequestValidation";
 import { User } from "../models/user";
 import { BadRequestError } from "../errors/bad-request-error";
@@ -11,10 +11,10 @@ const signinRouter = express.Router()
 
 signinRouter.post("/api/users/signin", 
 [
-  body('email')
+  check('email')
     .isEmail()
     .withMessage('Email must be valid'),
-  body('password')
+  check('password')
     .trim()
     .not()
     .isEmpty()
