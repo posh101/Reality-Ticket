@@ -21,7 +21,7 @@ res: Response,
 next: NextFunction
 ) => {
 
-    if(!req.session?.jwt) {
+    if(!req.session?.Jwt) {
         return next();
     }
 
